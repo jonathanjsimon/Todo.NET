@@ -13,6 +13,8 @@ namespace Todo.NET
 {
     public partial class Todo : Form
     {
+        Boolean debug = false;
+        
         //String todoLoc = "D:\\Dropbox\\todo\\todo.txt";
         String todoLoc = "F:\\todo\\todo.txt";
         LinkedList<todoItem> todoList = new LinkedList<todoItem>();
@@ -54,22 +56,20 @@ namespace Todo.NET
                         String[] words = line.Split(' ');
                         //Console.WriteLine("{0}, {1}, {2} ", line[0], line[1], line[2]);
                         //if (line[0].ToString().Equals("(") && alphabet.IndexOf(line[1].ToString(), 0) != -1 && line[2].ToString().Equals(")"))
-                        if (Regex.Match(words[0], @"^\([ABCDEFGHIJKLMNOPQRSTUVWXYZ]\)",RegexOptions.IgnoreCase).Success)
-                        {
-                            priority = line[1].ToString();
-                            MessageBox.Show(priority);
-                        
-                        }
 
+                        foreach (var word in words)
+                        {
+                            if (Regex.Match(word, @"^\([ABCDEFGHIJKLMNOPQRSTUVWXYZ]\)", RegexOptions.IgnoreCase).Success)
+                            {
+                                priority = word[1].ToString();
+                                if (debug)
+                                    MessageBox.Show(priority);
+
+                            }
+                        }
                         todoList.AddLast(new todoItem(line));
                     }
 
-
-                        //todoList.AddLast(line);
-
-                    /*
-
-                    */
                 }
 
             }
