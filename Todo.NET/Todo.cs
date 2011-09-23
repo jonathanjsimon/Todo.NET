@@ -15,8 +15,8 @@ namespace Todo.NET
     {
         Boolean debug = true;
         
-        //String todoLoc = "D:\\Dropbox\\todo\\todo.txt";
-        String todoLoc = "F:\\todo\\todo.txt";
+        String todoLoc = "D:\\Dropbox\\todo\\todo.txt";
+        //String todoLoc = "F:\\todo\\todo.txt";
         LinkedList<todoItem> todoList = new LinkedList<todoItem>();
 
         String[] alphabetArr = new String[26] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
@@ -32,10 +32,12 @@ namespace Todo.NET
             InitializeComponent();
 
            
-
+            /*
+             * \-[0-9][1-2]\-[0-3][0-9]
+             */ 
             readTodo();
             writeListBox();
-            MessageBox.Show(Regex.Match("2011-07-04", @"2[0-9][0-9][0-9]\-[0-9][1-2]\-[0-3][0-9]", RegexOptions.IgnoreCase).Success.ToString());
+            //MessageBox.Show(Regex.Match("2011-07-04", @"^2[0-9][0-9][0-9]\-[0-9][0-9]\-[0-9][0-9]", RegexOptions.IgnoreCase).Success.ToString());
 
 
         }
@@ -52,6 +54,8 @@ namespace Todo.NET
                     Int16 lineCount = 0;
                     while ((line = sr.ReadLine()) != null){
 
+                        lineCount++;
+
                         String priority, date, todo, project, context;
 
                         String[] words = line.Split(' ');
@@ -65,14 +69,32 @@ namespace Todo.NET
                                     MessageBox.Show(priority);
 
                             }
-                            else if (Regex.Match(word, @"^2[0-9][0-9][0-9]\-[0-9][1-2]\-[0-3][0-9]", RegexOptions.IgnoreCase).Success)
+                            else if (Regex.Match(word, @"^2[0-9][0-9][0-9]\-[0-9][0-9]\-[0-9][0-9]", RegexOptions.IgnoreCase).Success)
                             {
                                 date = word;
                                 if (debug)
                                     MessageBox.Show(date);
                             }
+                            else if (Regex.Match(word, @"^\+[a-zA-Z0-9]+", RegexOptions.IgnoreCase).Success)
+                            {
+                                project = word;
+                                if (debug)
+                                    MessageBox.Show(project);
+                            }
+                            else if (Regex.Match(word, @"^@[a-zA-Z0-9]+", RegexOptions.IgnoreCase).Success)
+                            {
+                                context = word;
+                                if (debug)
+                                    MessageBox.Show(context);
+                            }
+                            else
+                            {
+                                todo = todo + " " + word;
+                            }
+
+                            todoList.AddLast(new todoItem(lineCount.ToString(), priority, date, todo, project, context, line);
                         }
-                        todoList.AddLast(new todoItem(line));
+                        //todoList.AddLast(new todoItem(line));
                     }
 
                 }
@@ -96,15 +118,20 @@ namespace Todo.NET
             {
                 todoListBox.Items.RemoveAt(0);
             }
-            
 
+            for (int i = 0; i < todoList.Count; i++)
+            {
+
+            }
+
+            /*
             Int16 count = 1;
             foreach (var item in todoList)
             {
                 todoListBox.Items.Add(count.ToString() + " " + item.ToString());
                 count++;
             }
-
+            */
             isWritingList = false;
         }
 
