@@ -54,9 +54,7 @@ namespace Todo.NET
                         String priority, date, todo, project, context;
 
                         String[] words = line.Split(' ');
-                        //Console.WriteLine("{0}, {1}, {2} ", line[0], line[1], line[2]);
-                        //if (line[0].ToString().Equals("(") && alphabet.IndexOf(line[1].ToString(), 0) != -1 && line[2].ToString().Equals(")"))
-
+                        
                         foreach (var word in words)
                         {
                             if (Regex.Match(word, @"^\([ABCDEFGHIJKLMNOPQRSTUVWXYZ]\)", RegexOptions.IgnoreCase).Success)
