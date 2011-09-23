@@ -35,6 +35,7 @@ namespace Todo.NET
 
             readTodo();
             writeListBox();
+            MessageBox.Show(Regex.Match("2011-07-04", @"2[0-9][0-9][0-9]\-[0-9][1-2]\-[0-3][0-9]", RegexOptions.IgnoreCase).Success.ToString());
 
 
         }
