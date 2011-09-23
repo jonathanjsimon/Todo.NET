@@ -13,7 +13,7 @@ namespace Todo.NET
 {
     public partial class Todo : Form
     {
-        Boolean debug = false;
+        Boolean debug = true;
         
         //String todoLoc = "D:\\Dropbox\\todo\\todo.txt";
         String todoLoc = "F:\\todo\\todo.txt";
@@ -64,6 +64,12 @@ namespace Todo.NET
                                     MessageBox.Show(priority);
 
                             }
+                            else if (Regex.Match(word, @"^2[0-9][0-9][0-9]\-[0-9][1-2]\-[0-3][0-9]", RegexOptions.IgnoreCase).Success)
+                            {
+                                date = word;
+                                if (debug)
+                                    MessageBox.Show(date);
+                            }
                         }
                         todoList.AddLast(new todoItem(line));
                     }
@@ -94,7 +100,7 @@ namespace Todo.NET
             Int16 count = 1;
             foreach (var item in todoList)
             {
-                todoListBox.Items.Add(count.ToString() + ". " + item.ToString());
+                todoListBox.Items.Add(count.ToString() + " " + item.ToString());
                 count++;
             }
 
