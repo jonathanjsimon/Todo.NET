@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Todo.NET
 {
@@ -19,6 +20,8 @@ namespace Todo.NET
             "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
 
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        Boolean isWritingList = false;
 
         //LinkedList<String> todoList = new LinkedList<String>();
         public Todo()
@@ -36,6 +39,7 @@ namespace Todo.NET
 
         private void readTodo()
         {
+            todoList.Clear();
             try
             {
                 using (StreamReader sr = new StreamReader(todoLoc))
@@ -46,13 +50,17 @@ namespace Todo.NET
 
                         String priority, date, todo, project, context;
 
-                        //String[] words = line.Split(' ');
-
-                        if (line[0].Equals("(") && alphabet.IndexOf(line[1], 0) != -1 && line[2].Equals(")"))
+                        String[] words = line.Split(' ');
+                        //Console.WriteLine("{0}, {1}, {2} ", line[0], line[1], line[2]);
+                        //if (line[0].ToString().Equals("(") && alphabet.IndexOf(line[1].ToString(), 0) != -1 && line[2].ToString().Equals(")"))
+                        if (Regex.Match(words[0], @"^\([ABCDEFGHIJKLMNOPQRSTUVWXYZ]\)",RegexOptions.IgnoreCase).Success)
                         {
                             priority = line[1].ToString();
+                            MessageBox.Show(priority);
                         
                         }
+
+                        todoList.AddLast(new todoItem(line));
                     }
 
 
@@ -75,22 +83,37 @@ namespace Todo.NET
 
         private void writeListBox()
         {
+
+            isWritingList = true;
+
+            while (todoListBox.Items.Count > 0)
+            {
+                todoListBox.Items.RemoveAt(0);
+            }
+            
+
             Int16 count = 1;
             foreach (var item in todoList)
             {
-                listBox1.Items.Add(count.ToString() + ". " + item);
+                todoListBox.Items.Add(count.ToString() + ". " + item.ToString());
                 count++;
             }
+
+            isWritingList = false;
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void todoListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string curItem = listBox1.SelectedItem.ToString();
-            //string curItem = listView1.SelectedItems.ToString();
+            if (!isWritingList)
+            {
+                string curItem = todoListBox.SelectedItem.ToString();
+                //string curItem = listView1.SelectedItems.ToString();
 
-            //MessageBox.Show(curItem);
+                //MessageBox.Show(curItem);
 
-            label1.Text = curItem;
+                label1.Text = curItem;
+                todoLineBox.Text = curItem;
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -107,6 +130,12 @@ namespace Todo.NET
         {
             About about = new About();
             about.Show();
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            readTodo();
+            writeListBox();
         }
 
     }

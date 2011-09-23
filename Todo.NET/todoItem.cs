@@ -28,5 +28,15 @@ namespace Todo.NET
             fullLine = cFullLine;
         }
 
+        public todoItem(String cFullLine)
+        {
+            fullLine = cFullLine;
+        }
+
+        public override String ToString()
+        {
+            return fullLine;
+        }
+
     }
 }
