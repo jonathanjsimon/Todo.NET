@@ -13,7 +13,8 @@ namespace Todo.NET
 {
     public partial class Todo : Form
     {
-        String todoLoc = "D:\\Dropbox\\todo\\todo.txt";
+        //String todoLoc = "D:\\Dropbox\\todo\\todo.txt";
+        String todoLoc = "F:\\todo\\todo.txt";
         LinkedList<todoItem> todoList = new LinkedList<todoItem>();
 
         String[] alphabetArr = new String[26] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
