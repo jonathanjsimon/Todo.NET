@@ -6,21 +6,65 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Todo.NET
 {
     public partial class Todo : Form
     {
+        String todoLoc = "D:\\Dropbox\\todo\\todo.txt";
+        LinkedList<todoItem> todoList = new LinkedList<todoItem>();
+        //LinkedList<String> todoList = new LinkedList<String>();
         public Todo()
         {
             InitializeComponent();
-            for (int i = 0; i < 10; i++)
-            {
-                //listView1.Items.Add(i.ToString());
-                listBox1.Items.Add(i.ToString());
-            }
 
-            //label1.Text = "test";
+           
+
+            readTodo();
+            writeListBox();
+
+
+        }
+
+
+        private void readTodo()
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader(todoLoc))
+                {
+                    String line;
+                    while ((line = sr.ReadLine()) != null)
+
+                        String[] words = line.Split(' ');
+
+
+                        todoList.AddLast(line);
+
+                    /*
+
+                    */
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                String message = todoLoc + " could not be read\n" + e.Message;
+                MessageBox.Show(message);
+
+            }
+        }
+
+        private void writeListBox()
+        {
+            Int16 count = 1;
+            foreach (var item in todoList)
+            {
+                listBox1.Items.Add(count.ToString() + ". " + item);
+                count++;
+            }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -28,17 +72,7 @@ namespace Todo.NET
             string curItem = listBox1.SelectedItem.ToString();
             //string curItem = listView1.SelectedItems.ToString();
 
-            MessageBox.Show(curItem);
-
-            label1.Text = curItem;
-        }
-
-        private void listBox1_Click(object sender, EventArgs e)
-        {
-            string curItem = listBox1.SelectedItem.ToString();
-            //string curItem = listView1.SelectedItems.ToString();
-
-            MessageBox.Show(curItem);
+            //MessageBox.Show(curItem);
 
             label1.Text = curItem;
         }
