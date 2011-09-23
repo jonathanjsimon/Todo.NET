@@ -8,22 +8,24 @@ namespace Todo.NET
     class todoItem
     {
 
-        String line;
+        String lineNum;
         String priority;
         String date;
         String todo;
         String project;
         String context;
+        String fullLine;
 
-        public todoItem(String cLine, String cPriority, String cDate,
-            String cTodo, String cProject, String cContext)
+        public todoItem(String cLineNum, String cPriority, String cDate,
+            String cTodo, String cProject, String cContext, String cFullLine)
         {
-            line = cLine;
+            lineNum = cLineNum;
             priority = cPriority;
             date = cDate;
             todo = cTodo;
             project = cProject;
             context = cContext;
+            fullLine = cFullLine;
         }
 
     }

@@ -14,6 +14,12 @@ namespace Todo.NET
     {
         String todoLoc = "D:\\Dropbox\\todo\\todo.txt";
         LinkedList<todoItem> todoList = new LinkedList<todoItem>();
+
+        String[] alphabetArr = new String[26] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+            "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+
+        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
         //LinkedList<String> todoList = new LinkedList<String>();
         public Todo()
         {
@@ -35,12 +41,22 @@ namespace Todo.NET
                 using (StreamReader sr = new StreamReader(todoLoc))
                 {
                     String line;
-                    while ((line = sr.ReadLine()) != null)
+                    Int16 lineCount = 0;
+                    while ((line = sr.ReadLine()) != null){
 
-                        String[] words = line.Split(' ');
+                        String priority, date, todo, project, context;
+
+                        //String[] words = line.Split(' ');
+
+                        if (line[0].Equals("(") && alphabet.IndexOf(line[1], 0) != -1 && line[2].Equals(")"))
+                        {
+                            priority = line[1].ToString();
+                        
+                        }
+                    }
 
 
-                        todoList.AddLast(line);
+                        //todoList.AddLast(line);
 
                     /*
 
