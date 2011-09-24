@@ -18,26 +18,29 @@ namespace Todo.NET
         String todoLoc = "D:\\Dropbox\\todo\\todo.txt";
         //String todoLoc = "F:\\todo\\todo.txt";
         List<todoItem> todoList = new List<todoItem>();
-
+        /*
         String[] alphabetArr = new String[26] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
             "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
 
-        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
+        String alphabet = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        */
         Boolean isWritingList = false;
 
-        //LinkedList<String> todoList = new LinkedList<String>();
         public Todo()
         {
             InitializeComponent();
 
+
+            if (File.Exists(todoLoc))
+            {
+                readTodo();
+                writeListBox();
+            }
+            else
+            {
+                MessageBox.Show("File read error");
+            }
            
-            /*
-             * \-[0-9][1-2]\-[0-3][0-9]
-             */ 
-            readTodo();
-            writeListBox();
-            //MessageBox.Show(Regex.Match("2011-07-04", @"^2[0-9][0-9][0-9]\-[0-9][0-9]\-[0-9][0-9]", RegexOptions.IgnoreCase).Success.ToString());
 
 
         }
@@ -68,27 +71,23 @@ namespace Todo.NET
                             if (Regex.Match(word, @"^\([ABCDEFGHIJKLMNOPQRSTUVWXYZ]\)", RegexOptions.IgnoreCase).Success)
                             {
                                 priority = word[1].ToString();
-                                if (debug)
-                                    Console.WriteLine(priority);
+                                if (debug) Console.WriteLine(priority);
 
                             }
                             else if (Regex.Match(word, @"^2[0-9][0-9][0-9]\-[0-9][0-9]\-[0-9][0-9]", RegexOptions.IgnoreCase).Success)
                             {
                                 date = word;
-                                if (debug)
-                                    Console.WriteLine(date);
+                                if (debug) Console.WriteLine(date);
                             }
                             else if (Regex.Match(word, @"^\+[a-zA-Z0-9]+", RegexOptions.IgnoreCase).Success)
                             {
                                 project = word;
-                                if (debug)
-                                    Console.WriteLine(project);
+                                if (debug) Console.WriteLine(project);
                             }
                             else if (Regex.Match(word, @"^@[a-zA-Z0-9]+", RegexOptions.IgnoreCase).Success)
                             {
                                 context = word;
-                                if (debug)
-                                    Console.WriteLine(context);
+                                if (debug) Console.WriteLine(context);
                             }
                             else
                             {
@@ -97,7 +96,7 @@ namespace Todo.NET
                         }
                         //todoList.AddLast(new todoItem(line));
                         newItem = new todoItem(lineCount.ToString(), priority, date, todo, project, context, line);
-                        Console.WriteLine(newItem.ToString());
+                        if (debug) Console.WriteLine(newItem.ToString());
                         todoList.Add(newItem);
                     }
 
@@ -111,6 +110,32 @@ namespace Todo.NET
                 MessageBox.Show(message);
 
             }
+        }
+
+        private void addTodo(String todoFull)
+        {
+            string testfile = "D:\\Dropbox\\todo\\testfile.txt";
+
+            if (File.Exists(testfile)){
+
+                using (StreamWriter sw = File.AppendText(testfile))
+                {
+                    sw.WriteLine(todoFull);
+                }
+
+
+                using (StreamReader sr = new StreamReader(testfile))
+                {
+                    String line;
+                    
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Console.WriteLine(line);
+                    }
+                }
+
+            }
+
         }
 
         private void writeListBox()
@@ -180,6 +205,11 @@ namespace Todo.NET
         {
             readTodo();
             writeListBox();
+        }
+
+        private void writeTest_Click(object sender, EventArgs e)
+        {
+            addTodo(todoLineBox.Text);
         }
 
     }
