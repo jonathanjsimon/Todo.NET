@@ -14,8 +14,7 @@ namespace Todo.NET
     public partial class Todo : Form
     {
         Boolean debug = false;
-        //git push test
-        //git test 2
+
         String todoLoc = "D:\\Dropbox\\todo\\todo.txt";
         //String todoLoc = "F:\\todo\\todo.txt";
         List<todoItem> todoList = new List<todoItem>();
