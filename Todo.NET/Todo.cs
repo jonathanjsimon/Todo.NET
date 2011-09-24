@@ -13,11 +13,11 @@ namespace Todo.NET
 {
     public partial class Todo : Form
     {
-        Boolean debug = true;
+        Boolean debug = false;
         
         String todoLoc = "D:\\Dropbox\\todo\\todo.txt";
         //String todoLoc = "F:\\todo\\todo.txt";
-        LinkedList<todoItem> todoList = new LinkedList<todoItem>();
+        List<todoItem> todoList = new List<todoItem>();
 
         String[] alphabetArr = new String[26] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
             "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
@@ -52,11 +52,14 @@ namespace Todo.NET
                 {
                     String line;
                     Int16 lineCount = 0;
+
+                    todoItem newItem;
+
                     while ((line = sr.ReadLine()) != null){
 
                         lineCount++;
 
-                        String priority, date, todo, project, context;
+                        String priority = "", date = "", todo = "", project = "", context = "";
 
                         String[] words = line.Split(' ');
                         
@@ -66,35 +69,36 @@ namespace Todo.NET
                             {
                                 priority = word[1].ToString();
                                 if (debug)
-                                    MessageBox.Show(priority);
+                                    Console.WriteLine(priority);
 
                             }
                             else if (Regex.Match(word, @"^2[0-9][0-9][0-9]\-[0-9][0-9]\-[0-9][0-9]", RegexOptions.IgnoreCase).Success)
                             {
                                 date = word;
                                 if (debug)
-                                    MessageBox.Show(date);
+                                    Console.WriteLine(date);
                             }
                             else if (Regex.Match(word, @"^\+[a-zA-Z0-9]+", RegexOptions.IgnoreCase).Success)
                             {
                                 project = word;
                                 if (debug)
-                                    MessageBox.Show(project);
+                                    Console.WriteLine(project);
                             }
                             else if (Regex.Match(word, @"^@[a-zA-Z0-9]+", RegexOptions.IgnoreCase).Success)
                             {
                                 context = word;
                                 if (debug)
-                                    MessageBox.Show(context);
+                                    Console.WriteLine(context);
                             }
                             else
                             {
                                 todo = todo + " " + word;
                             }
-
-                            todoList.AddLast(new todoItem(lineCount.ToString(), priority, date, todo, project, context, line);
                         }
                         //todoList.AddLast(new todoItem(line));
+                        newItem = new todoItem(lineCount.ToString(), priority, date, todo, project, context, line);
+                        Console.WriteLine(newItem.ToString());
+                        todoList.Add(newItem);
                     }
 
                 }
@@ -119,19 +123,26 @@ namespace Todo.NET
                 todoListBox.Items.RemoveAt(0);
             }
 
+            Console.WriteLine(todoList.Count);
+
             for (int i = 0; i < todoList.Count; i++)
             {
+                todoListBox.Items.Add(todoList[i].ToString());
 
+                Console.WriteLine(todoList[i].ToString());
             }
 
             /*
             Int16 count = 1;
             foreach (var item in todoList)
             {
-                todoListBox.Items.Add(count.ToString() + " " + item.ToString());
+                //todoListBox.Items.Add(((todoItem)item). + " " + item.ToString());
+                todoListBox.Items.Add(todoList[count] + " " + item.ToString());
                 count++;
             }
             */
+
+
             isWritingList = false;
         }
 

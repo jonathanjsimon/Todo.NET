@@ -35,7 +35,27 @@ namespace Todo.NET
 
         public override String ToString()
         {
-            return fullLine;
+            String output = "";
+
+            if (priority != "")
+                output = output.Trim() + "(" + priority + ")";
+
+            if (date != "")
+                output = output.Trim() + " " + date;
+
+            if (todo != "")
+                output = output.Trim() + " " + todo;
+
+            if (project != "")
+                output = output.Trim() + " " + project;
+
+            if (context != "")
+                output = output.Trim() + " " + context;
+
+            if (output != "")
+                return output.Trim();
+            else
+                return "There was an error, please check your todo.txt file";
         }
 
     }
