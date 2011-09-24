@@ -38,19 +38,19 @@ namespace Todo.NET
             String output = "";
 
             if (priority != "")
-                output = output.Trim() + "(" + priority + ")";
+                output = output.Trim() + "(" + priority.Trim() + ")";
 
             if (date != "")
-                output = output.Trim() + " " + date;
+                output = output.Trim() + " " + date.Trim();
 
             if (todo != "")
-                output = output.Trim() + " " + todo;
+                output = output.Trim() + " " + todo.Trim();
 
             if (project != "")
-                output = output.Trim() + " " + project;
+                output = output.Trim() + " " + project.Trim();
 
             if (context != "")
-                output = output.Trim() + " " + context;
+                output = output.Trim() + " " + context.Trim();
 
             if (output != "")
                 return output.Trim();
