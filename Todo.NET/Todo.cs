@@ -62,42 +62,11 @@ namespace Todo.NET
 
                         lineCount++;
 
-                        String priority = "", date = "", todo = "", project = "", context = "";
-
-                        String[] words = line.Split(' ');
+                        newItem = parseTodo(line, lineCount);
                         
-                        foreach (var word in words)
-                        {
-                            if (Regex.Match(word, @"^\([ABCDEFGHIJKLMNOPQRSTUVWXYZ]\)", RegexOptions.IgnoreCase).Success)
-                            {
-                                priority = word[1].ToString();
-                                if (debug) Console.WriteLine(priority);
-
-                            }
-                            else if (Regex.Match(word, @"^2[0-9][0-9][0-9]\-[0-9][0-9]\-[0-9][0-9]", RegexOptions.IgnoreCase).Success)
-                            {
-                                date = word;
-                                if (debug) Console.WriteLine(date);
-                            }
-                            else if (Regex.Match(word, @"^\+[a-zA-Z0-9]+", RegexOptions.IgnoreCase).Success)
-                            {
-                                project = word;
-                                if (debug) Console.WriteLine(project);
-                            }
-                            else if (Regex.Match(word, @"^@[a-zA-Z0-9]+", RegexOptions.IgnoreCase).Success)
-                            {
-                                context = word;
-                                if (debug) Console.WriteLine(context);
-                            }
-                            else
-                            {
-                                todo = todo + " " + word;
-                            }
-                        }
-                        //todoList.AddLast(new todoItem(line));
-                        newItem = new todoItem(lineCount.ToString(), priority, date, todo, project, context, line);
-                        if (debug) Console.WriteLine(newItem.ToString());
                         todoList.Add(newItem);
+
+                        if (debug) Console.WriteLine(newItem.ToString());
                     }
 
                 }
@@ -112,9 +81,42 @@ namespace Todo.NET
             }
         }
 
-        private void parseTodo(String todoFull)
+        private todoItem parseTodo(String todoFull, Int16 lineCount)
         {
+            String priority = "", date = "", todo = "", project = "", context = "";
 
+            String[] words = todoFull.Split(' ');
+
+            foreach (var word in words)
+            {
+                if (Regex.Match(word, @"^\([ABCDEFGHIJKLMNOPQRSTUVWXYZ]\)", RegexOptions.IgnoreCase).Success)
+                {
+                    priority = word[1].ToString();
+                    if (debug) Console.WriteLine(priority);
+
+                }
+                else if (Regex.Match(word, @"^2[0-9][0-9][0-9]\-[0-9][0-9]\-[0-9][0-9]", RegexOptions.IgnoreCase).Success)
+                {
+                    date = word;
+                    if (debug) Console.WriteLine(date);
+                }
+                else if (Regex.Match(word, @"^\+[a-zA-Z0-9]+", RegexOptions.IgnoreCase).Success)
+                {
+                    project = word;
+                    if (debug) Console.WriteLine(project);
+                }
+                else if (Regex.Match(word, @"^@[a-zA-Z0-9]+", RegexOptions.IgnoreCase).Success)
+                {
+                    context = word;
+                    if (debug) Console.WriteLine(context);
+                }
+                else
+                {
+                    todo = todo + " " + word;
+                }
+            }
+
+            return new todoItem(lineCount.ToString(), priority, date, todo, project, context, todoFull);
         }
 
         private void addTodo(String todoFull)
