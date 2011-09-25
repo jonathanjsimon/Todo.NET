@@ -182,7 +182,7 @@ namespace Todo.NET
 
         private void todoListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!isWritingList)
+            if (!isWritingList && todoListBox.SelectedItem != null)
             {
                 string curItem = todoListBox.SelectedItem.ToString();
                 //string curItem = listView1.SelectedItems.ToString();
