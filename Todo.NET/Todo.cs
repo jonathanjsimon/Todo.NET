@@ -112,25 +112,32 @@ namespace Todo.NET
             }
         }
 
+        private void parseTodo(String todoFull)
+        {
+
+        }
+
         private void addTodo(String todoFull)
         {
             string testfile = "D:\\Dropbox\\todo\\testfile.txt";
 
-            if (File.Exists(testfile)){
+            if (File.Exists(todoLoc)){
 
-                using (StreamWriter sw = File.AppendText(testfile))
+                using (StreamWriter sw = File.AppendText(todoLoc))
                 {
                     sw.WriteLine(todoFull);
                 }
 
-
-                using (StreamReader sr = new StreamReader(testfile))
+                if (debug)
                 {
-                    String line;
-                    
-                    while ((line = sr.ReadLine()) != null)
+                    using (StreamReader sr = new StreamReader(todoLoc))
                     {
-                        Console.WriteLine(line);
+                        String line;
+
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            Console.WriteLine(line);
+                        }
                     }
                 }
 
