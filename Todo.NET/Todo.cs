@@ -17,6 +17,7 @@ namespace Todo.NET
         Boolean backup = true;
 
         String todoLoc = "D:\\Dropbox\\todo\\todo.txt";
+        String todoBakLoc = "D:\\Dropbox\\todo\\todo.txt.bak";
         //String todoLoc = "F:\\todo\\todo.txt";
         List<todoItem> todoList = new List<todoItem>();
         /*
@@ -76,7 +77,7 @@ namespace Todo.NET
             catch (Exception e)
             {
 
-                String message = todoLoc + " could not be read\n" + e.Message;
+                String message = todoLoc + " could not be accessed\n" + e.Message;
                 MessageBox.Show(message);
 
             }
@@ -124,7 +125,15 @@ namespace Todo.NET
         {
             string testfile = "D:\\Dropbox\\todo\\testfile.txt";
 
-            if (File.Exists(todoLoc)){
+            //if (File.Exists(todoLoc)){
+
+            try
+            {
+
+                if (backup)
+                    File.Copy(todoLoc, todoBakLoc, true);
+
+
 
                 using (StreamWriter sw = File.AppendText(todoLoc))
                 {
@@ -144,6 +153,14 @@ namespace Todo.NET
                     }
                 }
 
+                readTodo();
+                writeListBox();
+
+            }
+            catch (Exception e)
+            {
+                String message = todoLoc + " could not be accessed\n" + e.Message;
+                MessageBox.Show(message);
             }
 
         }
