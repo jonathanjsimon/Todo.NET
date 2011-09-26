@@ -242,6 +242,12 @@ namespace Todo.NET
 
         private void writeTest_Click(object sender, EventArgs e)
         {
+            // Using 0 for line number of new todos
+            todoItem newItem = parseTodo(todoLineBox.Text, 0);
+            
+            /* Still just adding the raw text to the file, will use above parse
+             * code to add full todoItem to todoList and List View
+             */
             addTodo(todoLineBox.Text);
         }
 
