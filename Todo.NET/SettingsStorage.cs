@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Todo.NET
 {
-    class SettingsStorage
+    public class SettingsStorage
     {
 
 
