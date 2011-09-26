@@ -19,8 +19,8 @@ namespace Todo.NET
         public Boolean debug = false;
         public Boolean backup = true;
 
-        //public static String todoLoc = @"D:\Dropbox\todo\todo.txt";
-        public static String todoLoc = @"F:\todo\todo.txt";
+        public static String todoLoc = @"D:\Dropbox\todo\todo.txt";
+        //public static String todoLoc = @"F:\todo\todo.txt";
         public static String todoBakLoc = todoLoc + ".bak";
         //String todoBakLoc = "D:\\Dropbox\\todo\\todo.txt.bak";
 
