@@ -13,6 +13,9 @@ namespace Todo.NET
 {
     public partial class Todo : Form
     {
+
+        //SettingsStorage settingsObj;
+
         public Boolean debug = false;
         public Boolean backup = true;
 
@@ -37,8 +40,17 @@ namespace Todo.NET
         {
             InitializeComponent();
 
+            loadSettings();
+
             readTodo();
             writeListBox();
+        }
+
+
+        private void loadSettings()
+        {
+
+            //settingsObj = new SettingsStorage(@"D:\Dropbox\todo\todo.txt", true, false, true);
         }
 
 
@@ -235,8 +247,8 @@ namespace Todo.NET
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Settings settings = new Settings();
-            settings.ShowDialog();
+            Settings settingsWindow = new Settings();
+            settingsWindow.ShowDialog();
         }
 
     }
