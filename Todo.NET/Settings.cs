@@ -16,6 +16,13 @@ namespace Todo.NET
             InitializeComponent();
 
             String saveLocation = Environment.GetEnvironmentVariable("APPDATA") + @"\Todo.NET\settings";
+
+            MessageBox.Show(saveLocation);
+        }
+
+        private void settingsCancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
