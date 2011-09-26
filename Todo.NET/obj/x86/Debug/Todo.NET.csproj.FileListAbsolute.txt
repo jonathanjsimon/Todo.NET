@@ -8,3 +8,4 @@ C:\Users\jsimon\documents\visual studio 2010\Projects\Todo.NET\Todo.NET\obj\x86\
 C:\Users\jsimon\documents\visual studio 2010\Projects\Todo.NET\Todo.NET\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\jsimon\documents\visual studio 2010\Projects\Todo.NET\Todo.NET\obj\x86\Debug\Todo.NET.exe
 C:\Users\jsimon\documents\visual studio 2010\Projects\Todo.NET\Todo.NET\obj\x86\Debug\Todo.NET.pdb
+C:\Users\jsimon\Documents\Visual Studio 2010\Projects\Todo.NET\Todo.NET\obj\x86\Debug\Todo.NET.Settings.resources

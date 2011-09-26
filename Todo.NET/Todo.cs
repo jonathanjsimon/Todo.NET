@@ -13,11 +13,16 @@ namespace Todo.NET
 {
     public partial class Todo : Form
     {
-        Boolean debug = false;
-        Boolean backup = true;
+        public Boolean debug = false;
+        public Boolean backup = true;
 
-        String todoLoc = "D:\\Dropbox\\todo\\todo.txt";
-        String todoBakLoc = "D:\\Dropbox\\todo\\todo.txt.bak";
+        public static String todoLoc = @"D:\Dropbox\todo\todo.txt";
+        public static String todoBakLoc = todoLoc + ".bak";
+        //String todoBakLoc = "D:\\Dropbox\\todo\\todo.txt.bak";
+
+        String homeFolder = Environment.GetEnvironmentVariable("USERPROFILE");
+
+
         //String todoLoc = "F:\\todo\\todo.txt";
         List<todoItem> todoList = new List<todoItem>();
         /*
@@ -32,19 +37,8 @@ namespace Todo.NET
         {
             InitializeComponent();
 
-
-            if (File.Exists(todoLoc))
-            {
-                readTodo();
-                writeListBox();
-            }
-            else
-            {
-                MessageBox.Show("File read error");
-            }
-           
-
-
+            readTodo();
+            writeListBox();
         }
 
 
@@ -225,7 +219,7 @@ namespace Todo.NET
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             About about = new About();
-            about.Show();
+            about.ShowDialog();
         }
 
         private void refreshButton_Click(object sender, EventArgs e)
@@ -237,6 +231,12 @@ namespace Todo.NET
         private void writeTest_Click(object sender, EventArgs e)
         {
             addTodo(todoLineBox.Text);
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings();
+            settings.ShowDialog();
         }
 
     }
