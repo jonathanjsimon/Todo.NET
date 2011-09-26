@@ -14,7 +14,7 @@ namespace Todo.NET
     public partial class Todo : Form
     {
 
-        SettingsStorage settingsObj;
+        public SettingsStorage settingsObj;
 
         public Boolean debug = false;
         public Boolean backup = true;
@@ -51,6 +51,7 @@ namespace Todo.NET
         {
 
             settingsObj = new SettingsStorage(@"D:\Dropbox\todo\todo.txt", true, false, true);
+            debug = settingsObj.debug;
         }
 
 

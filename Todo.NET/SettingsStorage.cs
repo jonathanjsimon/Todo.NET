@@ -9,10 +9,10 @@ namespace Todo.NET
     {
 
 
-        String todoLoc;
-        Boolean backup;
-        Boolean includeDate;
-        Boolean debug;
+        public String todoLoc;
+        public Boolean backup;
+        public Boolean includeDate;
+        public Boolean debug;
 
 
         public SettingsStorage(String cTodoPath, Boolean cBackUp, Boolean cIncludeDate, Boolean cDebugMode)
