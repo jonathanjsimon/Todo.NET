@@ -14,19 +14,19 @@ namespace Todo.NET
     public partial class Todo : Form
     {
 
-        //SettingsStorage settingsObj;
+        SettingsStorage settingsObj;
 
         public Boolean debug = false;
         public Boolean backup = true;
 
-        public static String todoLoc = @"D:\Dropbox\todo\todo.txt";
+        //public static String todoLoc = @"D:\Dropbox\todo\todo.txt";
+        public static String todoLoc = @"F:\todo\todo.txt";
         public static String todoBakLoc = todoLoc + ".bak";
         //String todoBakLoc = "D:\\Dropbox\\todo\\todo.txt.bak";
 
         String homeFolder = Environment.GetEnvironmentVariable("USERPROFILE");
 
 
-        //String todoLoc = "F:\\todo\\todo.txt";
         List<todoItem> todoList = new List<todoItem>();
         /*
         String[] alphabetArr = new String[26] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
@@ -50,7 +50,7 @@ namespace Todo.NET
         private void loadSettings()
         {
 
-            //settingsObj = new SettingsStorage(@"D:\Dropbox\todo\todo.txt", true, false, true);
+            settingsObj = new SettingsStorage(@"D:\Dropbox\todo\todo.txt", true, false, true);
         }
 
 
